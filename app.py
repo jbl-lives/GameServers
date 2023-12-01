@@ -6,11 +6,11 @@ app = Flask(__name__)
 
 # Create database connection
 conn = mysql.connector.connect(
-    host="127.0.0.1",
+    host="viaduct.proxy.rlwy.net",
     user="root",
-    password="jabu@1994",
-    database="tutorials",
-    port=3306
+    password="1-HHcAd341DH5BcbFAeEAAFBheh5d4gE",
+    database="railway",
+    port=23987
 )
 
 mycursor = conn.cursor()
