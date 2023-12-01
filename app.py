@@ -1,16 +1,20 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 import mysql.connector
 
-
+# initialize the flask application
 app = Flask(__name__)
 
+# Create database connection
 conn = mysql.connector.connect(
-    host="192.168.31.100",
+    host="127.0.0.1",
     user="root",
     password="jabu@1994",
     database="tutorials"
 )
 
+mycursor = conn.cursor()
+
 @app.route('/')
+# ‘/’ URL is bound with hello_world() function.
 def hello_world():
-    return 'Hello, Zuma!'
+    return 'Hello World'
