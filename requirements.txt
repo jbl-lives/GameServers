@@ -1,2 +1,3 @@
-Flask
+Flask~=3.0.0
 Gunicorn
+mysql-connector-python~=8.2.0
