@@ -9,7 +9,8 @@ conn = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
     password="jabu@1994",
-    database="tutorials"
+    database="tutorials",
+    port=3306
 )
 
 mycursor = conn.cursor()
