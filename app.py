@@ -37,9 +37,36 @@ def insert_games():
         return jsonify({'error': str(e)}), 500
 
 
-# Function to retrieve a single data set of game based on the user input
-@app.route('/get_game', methods=['GET', 'POST'])
+app.route('/get_game', methods=['GET', 'POST'])
 def get_game():
+    try:
+        if request.method == 'GET':
+            g_name = request.args.get('gameName')
+        elif request.method == 'POST':
+            g_name = request.form.get('gameName')
+        else:
+            return jsonify({'message': 'Method not allowed'}), 405
+
+        sql = "SELECT * FROM games WHERE game_name = %s"
+        mycursor.execute(sql, (g_name,))
+
+        game_data = mycursor.fetchone()
+
+        if game_data:
+            return jsonify(*[
+                str(game_data[1]),  # game_name
+                str(game_data[2]),  # price
+                str(game_data[3]),  # rating
+                str(game_data[4])  # release_date
+            ]), 200
+        else:
+            return jsonify(*[
+                'Game not found'
+            ]), 404
+
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
     try:
         if request.method == 'GET':
             g_name = request.args.get('gameName')
