@@ -50,7 +50,7 @@ def get_game():
 
         if game_data:
             # Return the data as plain text
-            return f"{game_data[1]} \n {(game_data[2])} \n {str(game_data[3])} \n {str(game_data[4])}", 200
+            return f"{str(game_data[1])} \n {str(game_data[2])} \n {str(game_data[3])} \n {str(game_data[4])}", 200
         else:
             return jsonify({'message': 'Game not found'}), 404
 
