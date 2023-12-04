@@ -50,12 +50,12 @@ def get_game():
         game_data = mycursor.fetchone()
 
         if game_data:
-            return jsonify({
-                'game_name': game_data[1],
-                'price': str(game_data[2]),
-                'rating': str(game_data[3]),
-                'release_date': str(game_data[4])
-            }), 200
+            return jsonify([
+                game_data[1],
+                str(game_data[2]),
+                str(game_data[3]),
+                str(game_data[4])
+            ]), 200
         else:
             return jsonify({'message': 'Game not found'}), 404
 
