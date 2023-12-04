@@ -4,20 +4,16 @@ import mysql.connector
 # initialize the flask application
 app = Flask(__name__)
 
-
 # Create database connection
 conn = mysql.connector.connect(
-    host = "viaduct.proxy.rlwy.net",
-    user = "root",
-    password = "1-HHcAd341DH5BcbFAeEAAFBheh5d4gE",
-    database = "railway",
-    port = 23987
+    host="viaduct.proxy.rlwy.net",
+    user="root",
+    password="1-HHcAd341DH5BcbFAeEAAFBheh5d4gE",
+    database="railway",
+    port=23987
 )
 
 mycursor = conn.cursor()
-
-
-# Function to insert values into the database using values gathered from the user's input
 @app.route('/insert_games', methods=['POST'])
 def insert_games():
     try:
@@ -54,17 +50,14 @@ def get_game():
         game_data = mycursor.fetchone()
 
         if game_data:
-            return jsonify(*[
-                game_data[1],  # game_name
-                str(game_data[2]),  # price
-                str(game_data[3]),  # rating
-                str(game_data[4])  # release_date
-            ]), 200
+            return jsonify({
+                'game_name': game_data[1],
+                'price': str(game_data[2]),
+                'rating': str(game_data[3]),
+                'release_date': str(game_data[4])
+            }), 200
         else:
-            return jsonify(*[
-                'Game not found'
-            ]), 404
-
+            return jsonify({'message': 'Game not found'}), 404
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -94,9 +87,3 @@ def get_all_games():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
