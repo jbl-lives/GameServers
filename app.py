@@ -54,7 +54,7 @@ def get_game():
         game_data = mycursor.fetchone()
 
         if game_data:
-            return jsonify(*[
+            return jsonify([
                 str(game_data[1]),  # game_name
                 str(game_data[2]),  # price
                 str(game_data[3]),  # rating
@@ -65,6 +65,30 @@ def get_game():
                 'Game not found'
             ]), 404
 
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/get_all_games', methods=['GET'])
+def get_all_games():
+    try:
+        sql = "SELECT * FROM games"
+        mycursor.execute(sql)
+
+        games_data = mycursor.fetchall()
+
+        games_list = []
+
+        for game_data in games_data:
+            game = {
+                'game_name': str(game_data[1]),
+                'price': str(game_data[2]),
+                'rating': str(game_data[3]),
+                'release_date': str(game_data[4])
+            }
+            games_list.append(game)
+
+        return jsonify({'games': games_list}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
