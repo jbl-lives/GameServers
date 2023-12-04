@@ -83,8 +83,8 @@ def get_all_games():
             game = {
                 'game_name': str(game_data[1]),
                 'price': str(game_data[2]),
-                'rating': str(game_data[3]),
-                'release_date': str(game_data[4])
+                'release_date': str(game_data[3]),
+                'rating': str(game_data[4])
             }
             games_list.append(game)
 
